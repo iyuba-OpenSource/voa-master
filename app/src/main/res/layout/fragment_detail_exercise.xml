@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.exercise.ExerciseViewModel" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LineManagers" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/wait_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:theme="@style/ProgressPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加载中..."
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_no_data_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/ic_no_test" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本篇暂未提供试题或网络无法访问"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_test_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="visible">
+
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                binding:isVisible="@{viewModel.examProcess == -1}"
+                binding:onClickCommand="@{viewModel.clickStart}">
+
+                <ImageView
+                    android:id="@+id/text_begin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_start_test" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="开始"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_content_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                binding:isVisible="@{viewModel.examProcess!=-1}"
+                tools:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/text_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text='@{viewModel.entity.testType==1? "选择题":"填空题"}'
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="选择题" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:id="@+id/button_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:paddingLeft="6dp"
+                            android:paddingTop="4dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="4dp"
+                            android:text="提交"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            binding:isVisible="@{viewModel.examProcess==3}"
+                            binding:onClickCommand="@{viewModel.clickSubmit}"
+                            tools:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/button_check_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:paddingLeft="6dp"
+                            android:paddingTop="4dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="4dp"
+                            android:text="查看成绩"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:visibility="gone"
+                            binding:isVisible="@{viewModel.examProcess==5}"
+                            binding:onClickCommand="@{viewModel.clickLookScore}"
+                            tools:visibility="visible" />
+
+                    </FrameLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/text_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@{viewModel.entity.question}"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="What is the reason for upcoming closure?" />
+
+                <!-- fill-in question blank -->
+
+                <EditText
+                    android:id="@+id/edit_fill_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:hint="请输入答案"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    binding:isVisible="@{viewModel.entity.testType == 2}"
+                    binding:textChanged="@{viewModel.textChanged}"
+                    tools:visibility="visible" />
+
+                <!-- single choice question options -->
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <RadioGroup
+                        android:id="@+id/linear_choice_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        binding:isVisible="@{viewModel.entity.testType == 1}">
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:buttonTint="@color/purple_500"
+                            android:checked='@{"A".equals(viewModel.entityAnswer.get(viewModel.topicIndex-1).userAnswer)}'
+                            android:onClick='@{()->viewModel.clickAnswer("A")}'
+                            android:padding="10dp"
+                            android:stateListAnimator="@null"
+                            android:text='@{"A.  "+viewModel.entity.answer1}'
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="A.  bad service" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:buttonTint="@color/purple_500"
+                            android:checked='@{"B".equals(viewModel.entityAnswer.get(viewModel.topicIndex-1).userAnswer)}'
+                            android:onClick='@{()->viewModel.clickAnswer("B")}'
+                            android:padding="10dp"
+                            android:stateListAnimator="@null"
+                            android:text='@{"B.  "+viewModel.entity.answer2}'
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="B.  bad service" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:buttonTint="@color/purple_500"
+                            android:checked='@{"C".equals(viewModel.entityAnswer.get(viewModel.topicIndex-1).userAnswer)}'
+                            android:onClick='@{()->viewModel.clickAnswer("C")}'
+                            android:padding="10dp"
+                            android:stateListAnimator="@null"
+                            android:text='@{"C.  "+viewModel.entity.answer3}'
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="C.  bad service" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:buttonTint="@color/purple_500"
+                            android:checked='@{"D".equals(viewModel.entityAnswer.get(viewModel.topicIndex-1).userAnswer)}'
+                            android:onClick='@{()->viewModel.clickAnswer("D")}'
+                            android:padding="10dp"
+                            android:stateListAnimator="@null"
+                            android:text='@{"D.  "+viewModel.entity.answer4}'
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="D.  bad service" />
+
+                    </RadioGroup>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/former_question"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_previous_question"
+                        binding:isThrottleFirst="@{Boolean.TRUE}"
+                        binding:onClickCommand="@{viewModel.clickPrevious}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text='@{"第"+viewModel.topicIndex+"题"}'
+                        android:textColor="@color/black"
+                        tools:text="第1题" />
+
+                    <ImageView
+                        android:id="@+id/next_question"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_next_question"
+                        binding:isThrottleFirst="@{Boolean.TRUE}"
+                        binding:onClickCommand="@{viewModel.clickNext}" />
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_result_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f2f2f2"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone"
+                binding:isVisible="@{viewModel.examProcess==4}"
+                tools:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/result_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="成绩"
+                        android:textColor="#424242"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/question_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/result_title"
+                        android:layout_marginTop="10dp"
+                        android:text="题目数量："
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/right_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/question_sum"
+                        android:layout_alignLeft="@id/question_sum"
+                        android:layout_alignRight="@id/question_sum"
+                        android:layout_marginTop="10dp"
+                        android:text="正确率："
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/test_spendtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/right_rate"
+                        android:layout_alignLeft="@id/right_rate"
+                        android:layout_alignRight="@id/right_rate"
+                        android:layout_marginTop="10dp"
+                        android:text="用时："
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/question_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/question_sum"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/question_sum"
+                        android:text="@{viewModel.entity.topicNum}"
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text=": 3题 " />
+
+                    <TextView
+                        android:id="@+id/right_rate_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/right_rate"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/right_rate"
+                        android:text="@{viewModel.entity.rightRate}"
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text=": 33%" />
+
+                    <TextView
+                        android:id="@+id/test_spendtime_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/test_spendtime"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/test_spendtime"
+                        android:text="@{viewModel.entity.speedTime}"
+                        android:textColor="#424242"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text=": 34分28秒" />
+
+                    <Button
+                        android:id="@+id/button_check_question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/result_title"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="4dp"
+                        android:text="查看原题"
+                        android:textColor="@color/white"
+                        binding:onClickCommand="@{viewModel.clickLookTopic}" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#cecece" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="我的答案："
+                    android:textColor="#616161" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_user_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    binding:itemAnimator="@{null}"
+                    binding:itemBinding="@{viewModel.itemBinding1}"
+                    binding:items="@{viewModel.observableList1}"
+                    binding:layoutManager="@{LayoutManagers.grid(2)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="正确答案："
+                    android:textColor="#616161" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_right_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    binding:itemAnimator="@{null}"
+                    binding:itemBinding="@{viewModel.itemBinding2}"
+                    binding:items="@{viewModel.observableList2}"
+                    binding:layoutManager="@{LayoutManagers.grid(2)}" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </FrameLayout>
+</layout>

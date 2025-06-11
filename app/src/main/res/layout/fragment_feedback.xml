@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.person.feedback.FeedbackViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_top_title"
+            binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:maxLength="20"
+                android:selectAllOnFocus="false"
+                android:text="邮箱："
+                android:textColor="@color/highlight"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/tv_sel_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:gravity="end"
+                android:hint="请填写"
+                android:inputType="textEmailAddress"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="@={viewModel.email}"
+                android:textColor="@color/textColorVice"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_split_line" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="意见:"
+            android:textColor="@color/highlight"
+            android:textSize="16sp" />
+
+        <include layout="@layout/layout_split_line" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorlines"
+            android:gravity="start"
+            android:hint="请填写"
+            android:lines="7"
+            android:maxLines="5"
+            android:paddingStart="15dp"
+            android:text="@={viewModel.content}"
+            android:textColor="@color/textColorVice"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_btn_ok"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                binding:onClickCommand="@{viewModel.clickSubmit}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

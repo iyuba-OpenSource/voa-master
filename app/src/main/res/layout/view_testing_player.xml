@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.testing.TestingViewModel" />
+
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_other_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_loop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                tools:src="@drawable/vector_drawable_single_cycle_true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="00:00"
+                android:textColor="@color/purple_500"
+                tools:text="00:01" />
+
+            <com.google.android.exoplayer2.ui.DefaultTimeBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:buffered_color="@color/highlight"
+                app:played_color="@color/darkgray"
+                app:scrubber_color="@color/darkgray"
+                app:scrubber_dragged_size="16dp"
+                app:scrubber_enabled_size="15dp"
+                app:unplayed_color="@color/lightGrey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="00:00"
+                android:textColor="@color/purple_500"
+                tools:text="00:01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_merge_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_loop1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                tools:src="@drawable/vector_drawable_single_cycle_true" />
+
+            <TextView
+                android:id="@id/exo_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/purple_500"
+                tools:text="00:01" />
+
+            <com.google.android.exoplayer2.ui.DefaultTimeBar
+                android:id="@id/exo_progress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:buffered_color="@color/highlight"
+                app:played_color="@color/darkgray"
+                app:scrubber_color="@color/darkgray"
+                app:scrubber_dragged_size="16dp"
+                app:scrubber_enabled_size="15dp"
+                app:unplayed_color="@color/lightGrey" />
+
+            <TextView
+                android:id="@id/exo_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/purple_500"
+                tools:text="00:01" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_ok"
+                android:gravity="center"
+                android:text='@{viewModel.contentStatus==0? "合成" : viewModel.contentStatus==1? "播放" : "暂停"}'
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                binding:onClickCommand="@{viewModel.clickMerge}"
+                tools:text="合成" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text='@{String.valueOf(viewModel.mergeScore)+"分"}'
+                android:textColor='@{viewModel.mergeScore &lt;=50? @color/score_red: viewModel.mergeScore &lt;80? Color.BLUE: @color/score_green}'
+                android:textSize="15sp"
+                android:visibility="@{viewModel.contentStatus==0? View.INVISIBLE : View.VISIBLE}" />
+
+            <TextView
+                android:id="@+id/tv_release"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_ok"
+                android:gravity="center"
+                android:text="发布"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

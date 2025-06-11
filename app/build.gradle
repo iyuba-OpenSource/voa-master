@@ -1,0 +1,351 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.mob.sdk'
+apply plugin: 'reinforcer-plugin'
+
+
+//apply from: 'jiagu.gradle'
+def mobKey = '"35aa07201b130"'   //其他平台 除华为
+def mobSecret = '"8f46766abc404c875269755e2f6b2086"'   //其他平台 除华为
+def mobSmsTemplate = '"7025425"'   //其他平台 除华为
+
+def mobHuaweiKey = '"35fd665269eba"'   //华为平台
+def mobHuaweiSecret = '"48e69bc515cad73b4b78a4321c9b2986"'   //华为平台
+def mobHuaweiSmsTemplate = '"7400298"'   //华为平台
+
+def mobCnnKey = '"2cb0a2a1bc076"'   //华为平台
+def mobCnnSecret = '"403b2311290d0fadb42aeabec48029ee"'   //华为平台
+def mobCnnSmsTemplate = '"7400298"'   //华为平台
+
+MobSDK {
+/*    appKey mobKey      //代码调用init 删去此
+    appSecret mobSecret*/
+    SMSSDK {}
+    SecVerify {}
+    ShareSDK {
+        loopShare true
+        devInfo {
+            Wechat {
+                appId "wxd37f3ef744dafc4b"
+                appSecret "8b522641e33a1d3d635130efdce869e0"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            WechatMoments {
+                appId "wxd37f3ef744dafc4b"
+                appSecret "8b522641e33a1d3d635130efdce869e0"
+            }
+            WechatFavorite {
+                appId "wxd37f3ef744dafc4b"
+                appSecret "8b522641e33a1d3d635130efdce869e0"
+            }
+            QQ {
+                appId "1109071172"
+                appKey "Sy7jiRfCW7AlUeCY"
+            }
+            QZone {
+                appId "1109071172"
+                appKey "Sy7jiRfCW7AlUeCY"
+            }
+            SinaWeibo {
+                appKey "3550862881"
+                appSecret "b1cba787ce49df2e46a344a54c2cc0c3"
+                callbackUri "http://www.sharesdk.cn"
+            }
+        }
+    }
+}
+
+android {
+    reinforcer {
+        //执行完打包任务后是否加固，默认为是
+        enabled = false
+        //以下两项为必填项，否则无法运行加固功能
+        outputDirectory = "D:\\3_User\\Desktop\\appPack"
+        installationPath = "D:\\1_Program\\1_Soft\\360jiagubao\\jiagu\\jiagu.jar"
+        //360加固助手的登录账号与密码，没有设置时，每次打包不进行登录操作，但是可能会加固失败。
+        username = "iyuba@sina.com"
+        password = "Iyu123456"
+        //默认情况下会读取android/buildTypes/release闭包下已配置的签名信息
+        //配置参数为signingConfigs节点下其中之一的名称
+        signConfigName = "release"
+        //默认情况下reinforcer加固后的文件名与项目中applicationVariants闭包下指定的文件名相同
+        //可通过以下方式添加映射关系，当文件名(不包含扩展名)与key值匹配时，输出的文件名会修改为value的值
+//        rename += ["key1": "value1", "key2": "value2"]
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('D:\\2_Office\\1_Projects\\1_ASProjects\\Iyuba\\iyuba_android.keystore')
+            storePassword 'buaaiyuba'
+            keyAlias 'android.keystore'
+            keyPassword 'buaaiyuba'
+        }
+        release {
+            storeFile file('D:\\2_Office\\1_Projects\\1_ASProjects\\Iyuba\\iyuba_android.keystore')
+            storePassword 'buaaiyuba'
+            keyAlias 'android.keystore'
+            keyPassword 'buaaiyuba'
+        }
+    }
+
+    def API_HOST_INQ_AI = "\"http://ai.iyuba.cn\""
+    def API_HOST_INQ_APPS = "\"http://apps.iyuba.cn\""
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+
+    defaultConfig {
+        buildConfigField("String", "MOB_KEY", "${mobKey}")
+        buildConfigField("String", "MOB_SECRET", "${mobSecret}")
+        buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobSmsTemplate}")
+//        builydConfigField("String", "API_HOST_INQ_APPS", "${API_HOST_INQ_APPS}")
+        buildConfigField("int", "PROTOCOL_VALUE", "3")
+        buildConfigField("int", "APPID_VALUE", "284")
+        manifestPlaceholders = [UMENG_CHANNEL: "other"]
+
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        vectorDrawables.useSupportLibrary = true
+        signingConfig signingConfigs.debug
+        multiDexEnabled true
+
+        ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+
+//        manifestPlaceholders = [qqappid: '100737826']
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs', '../iyubalib/libs'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    //    flavorDimensions 'huawei', 'oppo', 'vivo'
+    flavorDimensions 'channel'
+    productFlavors {
+        xiaomi {
+            dimension "channel"
+            resValue "string", "app_name", "VOA英语口语"
+            resValue "string", "file_provider_name_personal", "com.iyuba.voa2.provider"
+            /*         resValue "color", "colorPrimary", "@color/purple_500"
+                     resValue "color", "app_primary_color", "@color/purple_500"
+                     resValue "color", "colorPrimary_to_white", "@color/purple_500"*/
+            applicationId "com.iyuba.voa2"
+            manifestPlaceholders = [UMENG_CHANNEL: "xiaomi"]
+        }
+        vivo {
+            dimension "channel"
+            resValue "string", "app_name", "VOA英语口语"
+            resValue "string", "file_provider_name_personal", "com.iyuba.voa2.provider"
+            manifestPlaceholders = [UMENG_CHANNEL: "vivo"]
+        }
+        oppo {
+            dimension 'channel'
+            resValue "string", "app_name", "VOA英语听力"
+            resValue "string", "file_provider_name_personal", "com.iyuba.voa2.provider"
+            manifestPlaceholders = [UMENG_CHANNEL: "oppo"]
+        }
+        huawei {
+            buildConfigField("String", "MOB_KEY", "${mobHuaweiKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobHuaweiSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobHuaweiSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "huawei"]
+            applicationId "com.iyuba.voavoa"
+            resValue "string", "app_name", "VOA慢速英语官方"
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+//            buildConfigField("int", "PROTOCOL_VALUE", "1")   //vivo 1爱与吧  华为4山东爱语吧
+            buildConfigField("int", "PROTOCOL_VALUE", "4")   //vivo 1爱与吧  华为4山东爱语吧
+            buildConfigField("int", "APPID_VALUE", "201")
+        }
+        vivo2 {   //慢速vivo
+            buildConfigField("String", "MOB_KEY", "${mobHuaweiKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobHuaweiSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobHuaweiSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "vivo"]
+            applicationId "com.iyuba.voavoa"
+            resValue "string", "app_name", "ABC英语"
+            versionCode 10
+            versionName "1.9"
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+            buildConfigField("int", "PROTOCOL_VALUE", "4")   // 1北京爱与吧  华为4山东爱语吧
+            buildConfigField("int", "APPID_VALUE", "201")
+        }
+        other {   //voavoa改慢速  隐私为北京爱语吧
+            buildConfigField("String", "MOB_KEY", "${mobHuaweiKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobHuaweiSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobHuaweiSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "xiaomi"]
+            applicationId "com.iyuba.voavoa"
+            versionCode 10   //20221009发版9
+            versionName "1.92"
+            resValue "string", "app_name", "慢速英语"  //xiaomi
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+            buildConfigField("int", "PROTOCOL_VALUE", "1")
+            buildConfigField("int", "APPID_VALUE", "201")
+        }
+        meiyu {   //voavoa改慢速  隐私为北京爱语吧
+            buildConfigField("String", "MOB_KEY", "${mobHuaweiKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobHuaweiSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobHuaweiSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "xiaomi"]
+            applicationId "com.iyuba.AE"
+            versionCode 65   //20221009发版9
+            versionName "3.91"
+            resValue "string", "app_name", "美语怎么说"  //xiaomi
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+            buildConfigField("int", "PROTOCOL_VALUE", "1")
+            buildConfigField("int", "APPID_VALUE", "201")
+        }
+        meiyu2 {   //voavoa改慢速  隐私为北京爱语吧
+            buildConfigField("String", "MOB_KEY", "${mobHuaweiKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobHuaweiSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobHuaweiSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "xiaomi"]
+            applicationId "com.iyuba.AE"
+            versionCode 65   //20221009发版9
+            versionName "3.91"
+            resValue "string", "app_name", "VOA英语特刊"  //xiaomi
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+            buildConfigField("int", "PROTOCOL_VALUE", "1")
+            buildConfigField("int", "APPID_VALUE", "201")
+        }
+        cnn {
+            buildConfigField("String", "MOB_KEY", "${mobCnnKey}")
+            buildConfigField("String", "MOB_SECRET", "${mobCnnSecret}")
+            buildConfigField("String", "MOB_SMS_TEMPLATE", "${mobCnnSmsTemplate}")
+            dimension "channel"
+            manifestPlaceholders = [UMENG_CHANNEL: "huawei"]
+            applicationId "com.iyuba.cnn"
+            versionCode 30
+            versionName "1.31"
+            resValue "string", "app_name", "CNN英语"  //xiaomi
+            resValue "string", "file_provider_name_personal", "com.iyuba.voavoa.provider"
+            buildConfigField("int", "PROTOCOL_VALUE", "1")
+            buildConfigField("int", "APPID_VALUE", "255")
+        }
+
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def dirName = outputFile.parent // 输出文件夹所在的位置
+                // 文件名修改
+                println(dirName)
+                def fileName = "[VOA]-${variant.flavorName}-${variant.buildType.name}-${versionName}--build${versionCode}.apk"
+                // 比如不想这么麻烦，直接在后面加上版本号也行：
+                // def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+                outputFileName = fileName
+            }
+        }
+    }
+
+
+    dependencies {
+        implementation project(':mvvmhabit')
+        implementation project(':iyubalib')
+        implementation fileTree(include: ['*.?ar'], dir: '../iyubalib/libs')
+        implementation fileTree(include: ['*.?ar'], dir: 'libs')
+
+        implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
+//    api rootProject.ext.dependencies["bga-refreshlayout"]
+
+        implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖 下拉刷新框架
+        implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典加载
+        implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典刷新头
+
+
+        //媒体播放
+        implementation 'com.google.android.exoplayer:exoplayer-core:2.18.1'
+        implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
+        implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.1'
+
+        // For Java
+        implementation 'androidx.work:work-runtime:2.7.1'
+        implementation 'androidx.work:work-runtime-ktx:2.7.1'
+        implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+
+        implementation "org.permissionsdispatcher:permissionsdispatcher:$rootProject.ext.permissionDispatcherVersion"
+        annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:$rootProject.ext.permissionDispatcherVersion"
+        implementation 'com.haibin:calendarview:3.7.1'   //打卡日历控件
+        //音频录制
+//    implementation 'com.github.zhaolewei:ZlwAudioRecorder:v1.08'
+
+        implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'  //xml解析
+
+        api rootProject.ext.dependencies["pager-bottom-tab-strip"]
+
+        //room数据库框架
+        api rootProject.ext.support["room-runtime"]
+        annotationProcessor rootProject.ext.support["room-compiler"]
+        api rootProject.ext.support["room-rxjava3"]
+        api rootProject.ext.support["room-kotlin"]
+
+
+        api rootProject.ext.dependencies["agentweb"]
+
+
+        api rootProject.ext.dependencies["circleimageview"]
+//        api rootProject.ext.dependencies["ShadowLayout"]
+
+
+//        =================微课包
+//    implementation files('libs/alipaysdk-noutdid-15.8.05.211018174351.aar') // 支付宝 用fileTree代替
+
+        // 友盟统计SDK
+        api 'com.umeng.umsdk:common:9.4.7'// 必选
+        api 'com.umeng.umsdk:asms:1.4.1'// 必选
+        api 'com.umeng.umsdk:apm:1.5.2' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+
+
+    }
+    namespace 'com.iyuba.voa'
+}
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.iyuba.voa.data.entity.XmlWord" />
+
+        <variable
+            name="wordData"
+            type="androidx.databinding.ObservableField&lt;XmlWord&gt;" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+
+            <TextView
+                android:id="@+id/tv_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text='@{"/"+wordData.pron+"/"}'
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/vector_drawable_horn"
+                binding:isVisible="@{!wordData.pron.empty}"
+                tools:text="ˈsentəz" />
+
+
+            <ImageView
+                android:id="@+id/iv_collect_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="TODO"
+                android:paddingEnd="10dp"
+                android:src='@{wordData.isCollect ? @drawable/vector_drawable_collect_select : @drawable/vector_drawable_collect}'
+                tools:background="@drawable/vector_drawable_collect_select" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@{wordData.def}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="ˈsentəz" />
+    </LinearLayout>
+</layout>

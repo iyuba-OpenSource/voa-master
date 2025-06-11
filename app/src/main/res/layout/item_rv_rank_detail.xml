@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.ranking.detail.RankDetailItemViewModel" />
+
+        <import type="com.iyuba.voa.R" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rank_detail_head"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:civ_border_color="@color/gray"
+                app:civ_border_width="1dp"
+                binding:placeholderRes="@{R.mipmap.avatar_default}"
+                binding:url="@{viewModel.entity.headUrl}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/rank_detail_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="@{viewModel.entity.createDate}"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/rank_detail_play_img"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/anim_play"
+                        binding:currentView="@{viewModel.getImageView}"
+                        binding:onClickCommand="@{viewModel.clickPlay}"
+                        tools:ignore="ContentDescription" />
+
+
+                    <TextView
+                        android:id="@+id/rank_detail_para"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.1"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text='@{viewModel.entity.shuoshuotype==4?"合成":viewModel.entity.shuoshuotype==3?"配音":"单句"}'
+                        android:textColor="@color/highlight"
+                        tools:text="合成" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/rank_detail_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text='@{"成绩："+viewModel.entity.score}'
+                android:textColor="@color/black"
+                tools:text="成绩：99" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:drawableStart="@drawable/headline_ic_share_blue"
+                android:drawablePadding="5dp"
+                android:text="点击分享"
+                binding:onClickCommand="@{viewModel.clickShare}"
+
+            android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#AEAEAE" />
+
+    </LinearLayout>
+
+</layout>

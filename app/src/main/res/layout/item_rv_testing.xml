@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.testing.TestingItemViewModel" />
+
+        <import type="android.graphics.Color" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/eval_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        binding:onClickCommand="@{viewModel.clickItem}">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorlines" />
+
+        <TextView
+            android:id="@+id/sen_index"
+            android:layout_width="28dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/vector_drawable_label"
+            android:gravity="center"
+            android:text="@{String.valueOf(viewModel.entity.index)}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="12" />
+
+        <com.iyuba.voa.ui.widget.SelectWordTextView
+            android:id="@+id/eval_sen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_toEndOf="@+id/sen_index"
+            android:paddingTop="23dp"
+            android:paddingBottom="10dp"
+            android:text="@{viewModel.entity.sentence}"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:selectColor="@color/highlight"
+            binding:currentView="@{viewModel.getTextView}"
+            tools:text="A wp dadas d" />
+
+        <TextView
+            android:id="@+id/eval_sen_cn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eval_sen"
+            android:layout_alignStart="@id/eval_sen"
+            android:layout_marginEnd="35dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@{viewModel.entity.sentence_cn}"
+            android:textColor="@color/textColorDark"
+            android:textSize="14sp"
+            tools:text="hahdahahhdaha" />
+
+        <View
+            android:id="@+id/split_line"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_below="@id/eval_sen_cn"
+            android:layout_marginStart="35dp"
+            android:background="@color/colorlines"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/eval_btn_ly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/split_line"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="45dp"
+            android:paddingBottom="5dp"
+            binding:isVisible="@{viewModel.isClickItem}"
+            tools:visibility="visible">
+
+
+            <com.iyuba.voa.ui.widget.AroundCircleView
+                android:id="@+id/eval_play"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/vector_drawable_play"
+                android:src='@{viewModel.entity.isPlayCurrent ? @drawable/vector_drawable_pause : @drawable/vector_drawable_play}'
+                app:textBgColor="@color/white"
+                app:textColor="@color/purple_500"
+                app:textSize="2dp"
+                binding:onClickCommand="@{viewModel.clickPlay}"
+                binding:onProcess="@{viewModel.playPosition}"
+                binding:totalProcess="@{viewModel.playTotalTime}"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/vector_drawable_play" />
+
+            <ImageView
+                android:id="@+id/eval_rec"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/layer_record_volume"
+                binding:currentView="@{viewModel.getRecordView}"
+                binding:onClickCommand="@{viewModel.clickRecord}"
+                tools:ignore="ContentDescription" />
+
+
+            <com.iyuba.voa.ui.widget.AroundCircleView
+                android:id="@+id/eval_rec_play"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/vector_drawable_voice_play"
+                android:src="@drawable/vector_drawable_voice_play"
+                app:textBgColor="@color/white"
+                app:textColor="@color/purple_500"
+                app:textSize="2dp"
+                binding:isVisible="@{!viewModel.entity.audioUrl.empty}"
+                binding:onClickCommand="@{viewModel.clickHorn}"
+                binding:onProcess="@{viewModel.playVoicePosition}"
+                binding:totalProcess="@{viewModel.playVoiceTotalTime}"
+                tools:visibility="visible" />
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/vector_drawable_share"
+                binding:isVisible="@{!viewModel.entity.audioUrl.empty}"
+                binding:onClickCommand="@{viewModel.clickSingleRelease}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:src="@drawable/vector_drawable_share"
+                android:text="点击纠音"
+                android:textColor="@color/colorPrimary"
+                binding:isVisible="@{!viewModel.entity.audioUrl.empty}"
+                binding:onClickCommand="@{viewModel.clickCorrect}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:orientation="horizontal"
+                binding:isVisible="@{!viewModel.entity.audioUrl.empty}"
+                tools:ignore="RtlHardcoded">
+
+                <TextView
+                    android:id="@+id/eval_score"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/vector_drawable_score_side"
+                    android:gravity="center"
+                    android:text='@{viewModel.entity.score}'
+                    android:textColor='@{Double.parseDouble(viewModel.entity.score)&lt;=50? @color/score_red :Double.parseDouble(viewModel.entity.score)&lt;80? Color.BLUE:@color/score_green}'
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    tools:text="990"
+                    tools:visibility="visible" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eval_btn_ly"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(viewModel.entity.index)}"
+                android:textColor="@{!viewModel.entity.audioUrl.empty?@color/colorPrimary:@color/textColorDark}"
+                tools:text="22" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"/"+viewModel.entity.totalPara}'
+                android:textColor="@color/black"
+                tools:text="/22" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

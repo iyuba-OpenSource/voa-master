@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <uses-sdk android:minSdkVersion="19"></uses-sdk>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <activity
+            android:name=".base.ContainerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name=".crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+    </application>
+
+</manifest>

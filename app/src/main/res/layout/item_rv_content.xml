@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:look="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.content.ContentItemViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:background="@color/white"
+        android:focusable="true"
+        android:padding="10dp">
+        <!--        binding:onClickCommand="@{viewModel.clickItem}"-->
+
+
+        <com.iyuba.voa.ui.widget.SelectWordTextView
+            android:id="@+id/tv_detail_eng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:focusable="true"
+            android:text="@{viewModel.entity.sentence}"
+            android:textColor="@{viewModel.entity.isPlayCurrent ? @color/purple_500 : @color/black }"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectColor="@color/highlight"
+            look:text="adadapdoadapdop" />
+        <!--        binding:currentView="@{viewModel.getSelWordView}"-->
+        <!--        binding:onWordClickCommand="@{viewModel.clickWord}"-->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.entity.sentence_cn}"
+            android:textColor="@{viewModel.entity.isPlayCurrent ? @color/purple_500 : @color/textColorVice }"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_eng"
+            binding:isVisible="@{viewModel.entity.showCn}"
+            look:text="婆婆频道啊啊打打广告" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

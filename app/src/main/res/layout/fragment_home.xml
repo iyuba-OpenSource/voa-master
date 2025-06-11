@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.HomeViewModel" />
+
+        <import type="com.iyuba.voa.R" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorlines"
+        android:orientation="vertical"
+        tools:context=".ui.main.home.HomeFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
+
+            <include
+                layout="@layout/view_top_title"
+                binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:textSize="14sp"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/purple_500"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/purple_500"
+                app:tabTextColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorlines" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_quick_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_play_container_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_quick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:src="@mipmap/avatar_default"
+                binding:placeholderRes="@{R.mipmap.avatar_default}"
+                binding:url="@{viewModel.titleTed.pic}"
+                tools:src="@mipmap/avatar_default" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="8dp"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/text_quick"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:text="@{viewModel.titleTed.title_cn}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="I have to write some code for it\nsome content" />
+
+            <ImageView
+                android:id="@+id/image_toggle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:padding="5dp"
+                android:src='@{viewModel.isPlaying ? @drawable/exo_styled_controls_pause : @drawable/exo_styled_controls_play}'
+                tools:src="@drawable/exo_styled_controls_pause" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

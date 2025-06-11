@@ -1,0 +1,118 @@
+ext {
+
+    appcompatVersion = '1.4.1'
+    recyclerViewVersion = '1.1.0'
+    constraintLayoutVersion = '2.0.1'
+    materialVersion = '1.3.0'
+
+    retrofitVersion = '2.9.0'
+    okhttpVersion = '4.9.0'
+    rxandroidVersion = '2.1.0'
+    rxjavaVersion = '1.3.0'
+
+    glideVersion = '3.8.0'
+    glideTransformationsVerison = '2.0.2'
+    eventBusVersion = '3.2.0'
+    permissionDispatcherVersion = '4.8.0'
+    timberVersion = '4.7.1'
+    gsonVersion = '2.8.9'
+    loopViewVersion = '0.2.2'
+
+    smartRefreshVersion = '1.1.0'
+    bannerVersion = '1.4.10'
+    dropDownViewVersion = '1.0.1'
+
+
+    youdaosdkVersion = '4.2.16'
+
+    //android开发版本配置
+    android = [
+            compileSdkVersion: 31,
+            buildToolsVersion: "30.0.3",
+            applicationId    : "com.iyuba.voa2",
+            minSdkVersion    : 21,
+            targetSdkVersion : 32,   //不要轻易变动
+            versionCode      : 11,   //20221027发版10 1.9   20221111 导出测试包 11-2.0
+            versionName      : "2.0",
+    ]
+    //version配置
+    versions = [
+            "support-version"  : '1.5.0',
+            "junit-version"    : "4.12",
+            "room-version"     : '2.4.2',
+            "lifecycle_version": "2.4.1",
+
+    ]
+    //support配置
+    support = [
+            'support-v4'              : "androidx.legacy:legacy-support-v4:1.0.0",
+            'appcompat'               : "androidx.appcompat:appcompat:1.4.1",
+            'recyclerview'            : "androidx.recyclerview:recyclerview:${versions["support-version"]}",
+            'support-v13'             : "androidx.legacy:legacy-support-v13:${versions["support-version"]}",
+            'support-fragment'        : "androidx.fragment:fragment:${versions["support-version"]}",
+            'design'                  : "com.google.android.material:material:${versions["support-version"]}",
+            'animated-vector-drawable': "androidx.vectordrawable:vectordrawable-animated:${versions["support-version"]}",
+            'junit'                   : "junit:junit:${versions["junit-version"]}",
+            'room-runtime'            : "androidx.room:room-runtime:${versions["room-version"]}",
+            'room-compiler'           : "androidx.room:room-compiler:${versions["room-version"]}",
+            'room-kotlin'             : "androidx.room:room-ktx:${versions["room-version"]}",
+            'room-rxjava3'            : "androidx.room:room-rxjava3:${versions["room-version"]}",
+    ]
+    //依赖第三方配置
+    dependencies = [
+            //rxjava
+            "rxjava"                               : "io.reactivex.rxjava3:rxjava:3.0.4",
+            "rxandroid"                            : "io.reactivex.rxjava3:rxandroid:3.0.0",
+            //rx系列与View生命周期同步
+            "rxlifecycle"                          : "com.trello.rxlifecycle3:rxlifecycle:3.1.0",
+            "rxlifecycle-components"               : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
+            //rxbinding
+            "rxbinding"                            : "com.jakewharton.rxbinding4:rxbinding:4.0.0",
+            //rx 6.0权限请求
+            "rxpermissions"                        : "com.github.tbruyelle:rxpermissions:0.12",
+            //network
+            "okhttp"                               : "com.squareup.okhttp3:okhttp:4.9.0",
+            "okhttp-logging-interceptor"           : "com.squareup.okhttp3:logging-interceptor:4.9.0",
+            "retrofit"                             : "com.squareup.retrofit2:retrofit:2.9.0",
+            "converter-gson"                       : "com.squareup.retrofit2:converter-gson:2.9.0",
+            "adapter-rxjava"                       : "com.squareup.retrofit2:adapter-rxjava2:2.9.0",
+            //glide图片加载
+            "glide"                                : "com.github.bumptech.glide:glide:4.13.1",
+            "glide-compiler"                       : "com.github.bumptech.glide:compiler:4.13.1",
+            //json解析
+            "gson"                                 : "com.google.code.gson:gson:2.9.0",
+            //material-dialogs
+            "material-dialogs"                     : "com.afollestad.material-dialogs:core:0.9.6.0",
+            "material-dialogs-core"                : "com.afollestad.material-dialogs:core:3.3.0",
+            "material-dialogs-input"               : "com.afollestad.material-dialogs:input:3.3.0",
+            "material-dialogs-lifecycle"           : "com.afollestad.material-dialogs:lifecycle:3.3.0",
+
+            //recyclerview的databinding套装
+            "bindingcollectionadapter"             : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:4.0.0",
+            "bindingcollectionadapter-viewpager2"  : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-viewpager2:4.0.0",
+            "bindingcollectionadapter-recyclerview": "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:4.0.0",
+            //Google AAC
+            "lifecycle-compiler"                   : "androidx.lifecycle:lifecycle-compiler:${versions["lifecycle_version"]}",
+            // ViewModel
+            "lifecycle-viewmodel"                  : "androidx.lifecycle:lifecycle-viewmodel:${versions["lifecycle_version"]}",
+            // LiveData
+            "lifecycle-livedata"                   : "androidx.lifecycle:lifecycle-livedata:${versions["lifecycle_version"]}",
+            //MVVMHabit
+            "MVVMHabit"                            : "com.github.goldze:MVVMHabit:4.0.0",
+
+
+            "immersionbar"                         : "com.geyifeng.immersionbar:immersionbar:3.2.2", //沉浸式状态栏
+            "circleimageview"                      : "de.hdodenhof:circleimageview:3.1.0", //圆形头像
+            "agentweb"                             : "com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx",   //agentweb
+            "pager-bottom-tab-strip"               : "me.majiajie:pager-bottom-tab-strip:2.4.0",   //底部导航
+            "bga-refreshlayout"                    : "com.github.bingoogolapple:BGARefreshLayout-Android:2.0.1", //下拉刷新
+            "ShadowLayout"                         : "com.github.lihangleo2:ShadowLayout:3.0.4",    //阴影布局
+            "PickerView"                           : "com.contrarywind:Android-PickerView:4.1.9",  //时间选择器
+
+            "xLog"                                 : "com.elvishew:xlog:1.10.1",  //日志打印
+            "xLog-libcat"                          : "com.elvishew:xlog-libcat:1.0.0",  //日志打印（第三方库）
+
+    ]
+}
+
+

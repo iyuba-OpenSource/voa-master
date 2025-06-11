@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.vip.VipViewModel" />
+
+        <import type="com.iyuba.voa.R" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            layout="@layout/view_top_title"
+            binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:background="@color/purple_500"
+            android:padding="20dp"
+            android:visibility="visible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_avatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                binding:placeholderRes="@{R.mipmap.avatar_default}"
+                binding:url="@{viewModel.entity.imgSrc}"
+                tools:src="@mipmap/avatar_default" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/civ_avatar"
+                android:drawableEnd="@{viewModel.entity.isVIP ? @drawable/vector_drawable_vip_icon:null}"
+                android:text="@{viewModel.entity.username}"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:text="用户名" />
+
+            <TextView
+                android:id="@+id/vip_bi_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/civ_avatar"
+                android:text='@{"爱语币余额:"+ viewModel.entity.amount}'
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:text="余额" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vip_bi_count"
+                android:layout_alignBottom="@+id/civ_avatar"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/civ_avatar"
+                android:text='@{viewModel.entity.isVIP ? "会员有效期:" + viewModel.entity.expireTimeDate :  "普通用户" }'
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:text="会员到期" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:gravity="left|center">
+
+            <ImageView
+                android:id="@+id/vip_icon0"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/vip" />
+
+            <TextView
+                android:id="@+id/vip_tip0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/vip_icon0"
+                android:text=" VIP权限说明"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:background="@color/colorlines" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background='@{viewModel.vipType ==0?@color/shadow_orange:@color/white}'
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.clickThisVIP}">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/this_vip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc_mic1_new" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background='@{viewModel.vipType ==1?@color/shadow_orange:@color/white}'
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.clickAllVIP}">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/all_vip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc_mic1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/vip_ly_cate2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background='@{viewModel.vipType==1?@color/shadow_orange:@color/white}'
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@mipmap/all_vip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc_mic1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/vip_ly_cate3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background='@{viewModel.vipType==2?@color/shadow_orange:@color/white}'
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        binding:onClickCommand="@{viewModel.clickGoldenVIP}">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@mipmap/gold_vip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip_desc_mic2" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/vip_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorlines"
+                    android:padding="15dp"
+                    android:text='@{viewModel.vipType==0?@string/vip_intro1_2:viewModel.vipType==2?@string/vip_intro3:@string/vip_intro2}'
+                    android:textColor="@color/highlight"
+                    tools:text="@string/vip_intro1_2" />
+
+
+                <RelativeLayout
+                    android:id="@+id/vip_ly1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="vertical"
+                        android:paddingStart="15dp"
+                        binding:onCheckedChangedCommand="@{viewModel.clickRadio}">
+
+                        <RadioButton
+                            android:id="@+id/vip_rb1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/purple_500"
+                            android:checked="@{viewModel.vipSelect==0}"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_time1:viewModel.vipType==2?@string/gold_vip_time1:@string/all_vip_time1}'
+                            tools:text="@string/this_vip_time1" />
+
+                        <RadioButton
+                            android:id="@+id/vip_rb2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/purple_500"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_time2:viewModel.vipType==2?@string/gold_vip_time2:@string/all_vip_time2}'
+                            tools:text="@string/this_vip_time2" />
+
+
+                        <RadioButton
+                            android:id="@+id/vip_rb3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/purple_500"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_time3:viewModel.vipType==2?@string/gold_vip_time3:@string/all_vip_time3}'
+                            tools:text="@string/this_vip_time3" />
+
+
+                        <RadioButton
+                            android:id="@+id/vip_rb4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/purple_500"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_time4:viewModel.vipType==2?@string/gold_vip_time4:@string/all_vip_time4}'
+                            tools:text="@string/this_vip_time4" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="25dp"
+                        android:baselineAligned="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_price1:viewModel.vipType==2?@string/gold_vip_price1:@string/all_vip_price1}'
+                            android:textColor="@color/textColorDark"
+                            tools:text="@string/this_vip_price1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_price2:viewModel.vipType==2?@string/gold_vip_price2:@string/all_vip_price2}'
+                            android:textColor="@color/textColorDark"
+                            tools:text="@string/this_vip_price2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_price3:viewModel.vipType==2?@string/gold_vip_price3:@string/all_vip_price3}'
+                            android:textColor="@color/textColorDark"
+                            tools:text="@string/this_vip_price3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text='@{viewModel.vipType==0?@string/this_vip_price4:viewModel.vipType==2?@string/gold_vip_price4:@string/all_vip_price4}'
+                            android:textColor="@color/textColorDark"
+                            tools:text="@string/this_vip_price4" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:background="@color/colorlines" />
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/selector_btn_ok"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="立即开通"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    binding:onClickCommand="@{viewModel.clickSubmit}" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</layout>

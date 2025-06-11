@@ -1,0 +1,15 @@
+apply plugin: 'jiagu'
+
+
+
+jiagu {
+    debug = false // debug 模式
+    jiaGuDir = "/Users/dabing/Data/1_Program/1_Tool/jiagu" // 360加固文件根目录 必填
+    username = "iyuba@sina.com" // 360加固用户名 必填
+    password = "Iyu123456" // 360加固密码 必填
+    signingConfig = null // 签名文件，默认读取buildType中的signingConfig 或名为'release'的签名文件
+    channelFile = null // 指向通道备注文件.txt 默认null
+    outputFileDir = null // 输出apk文件地址 默认输出 build\jiagu
+    config = null // 扩展配置
+    charsetName = "GBK" // 控制台输出编码方式，默认GBK
+}

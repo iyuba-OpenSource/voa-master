@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.person.collect.word.WordCollectListItemViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_item_bgk"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="@{viewModel.entity.key}"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                binding:isVisible="@{!viewModel.entity.audio.empty}"
+                binding:onClickCommand="@{viewModel.clickPlay}"
+                tools:text="AADA" />
+
+
+            <ImageView
+                android:id="@+id/iv_collect_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="TODO"
+                android:paddingEnd="10dp"
+                android:src='@{viewModel.entity.isCollect ? @drawable/vector_drawable_collect_select : @drawable/vector_drawable_collect}'
+                android:visibility="visible"
+                binding:onClickCommand="@{viewModel.clickCollect}"
+                tools:background="@drawable/vector_drawable_collect_select" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:text='@{"/"+viewModel.entity.pron+"/"}'
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/vector_drawable_horn"
+            binding:isVisible="@{!viewModel.entity.audio.empty}"
+            binding:onClickCommand="@{viewModel.clickPlay}"
+            tools:text="/ˈsentəz/" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@{viewModel.entity.def}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="哈哈" />
+    </LinearLayout>
+</layout>

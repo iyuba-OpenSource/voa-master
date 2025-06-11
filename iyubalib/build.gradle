@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    namespace 'com.iyuba.iyubalib'
+
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    configurations.maybeCreate("default")
+//    artifacts.add("default", dir: 'libs')
+//    api fileTree(include: ['*.?ar'], dir: 'libs')
+    compileOnly fileTree(dir: 'libs', include: ['*.?ar'])
+
+
+    //iyuba - widget
+    api "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.ext.smartRefreshVersion"
+    api "com.scwang.smartrefresh:SmartRefreshHeader:$rootProject.ext.smartRefreshVersion"
+    api "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
+    api "com.youth.banner:banner:$rootProject.ext.bannerVersion"
+    implementation "org.permissionsdispatcher:permissionsdispatcher:$rootProject.ext.permissionDispatcherVersion"
+    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:$rootProject.ext.permissionDispatcherVersion"
+//    api "com.github.hotchemi:permissionsdispatcher:$PERMISSION_DISPATCHER_VERSION"
+//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSION_DISPATCHER_VERSION"
+    api "com.github.AnthonyFermin:DropDownView:$rootProject.ext.dropDownViewVersion"
+    api "com.weigan:loopView:$rootProject.ext.loopViewVersion"
+    implementation("com.daimajia.swipelayout:library:1.2.0@aar") {
+        exclude group: 'com.android.support'
+    }
+    api 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
+    /*item动画*/
+    api 'jp.wasabeef:recyclerview-animators:1.3.0'
+    api 'jp.wasabeef:glide-transformations:2.0.1'
+    api('com.weigan:loopView:0.1.2') {
+        exclude group: 'com.android.support'
+    }
+    api('com.youth.banner:banner:1.4.10') {
+        exclude group: 'com.android.support'
+    }
+    api "com.github.naman14:TAndroidLame:1.1"
+    api 'com.google.zxing:core:3.3.3'
+    api "com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0"
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+    api 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
+    implementation 'com.xingliuhua:xlhratingbar_lib:1.0.1'
+    implementation 'tyrantgit:explosionfield:1.0.1'
+
+
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.ranking.detail.RankDetailViewModel" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LineManagers" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorlines"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_top_title"
+            binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
+
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnableFooterFollowWhenLoadFinished="false"
+            app:srlEnableLoadMore="false"
+            app:srlEnableScrollContentWhenLoaded="false"
+            binding:onSmartRefreshCommand="@{viewModel.refreshCommand}">
+            <!--            binding:onSmartLoadMoreCommand="@{viewModel.loadMoreCommand}"-->
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rl_detail_list"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                binding:itemAnimator="@{null}"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.observableList}"
+                binding:layoutManager="@{LayoutManagers.linear()}"
+                binding:lineManager="@{LineManagers.vertical()}"
+                binding:onScrollStateChangedCommand="@{viewModel.onScrollStateChangedCommand}"
+                tools:ignore="MissingConstraints" />
+            <!--
+                        <com.scwang.smart.refresh.footer.ClassicsFooter
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />-->
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+</layout>

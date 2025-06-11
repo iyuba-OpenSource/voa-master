@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+  <external-files-path
+    name="app_update"
+    path="appUpdate" />
+
+  <external-files-path
+    name="extra"
+    path="extra" />
+
+  <external-files-path
+    name="avatar"
+    path="avatar" />
+
+  <external-path
+    name="external_files"
+    path="." />
+
+  <external-path
+    name="spinapk"
+    path="spinapk" />
+
+  <external-path
+    name="gdt_sdk_download_path"
+    path="GDTDOWNLOAD" />
+
+  <external-files-path
+    name="youdaoSdkPath"
+    path="yd_sdk_path" />
+
+  <external-files-path
+    name="umeng_cache"
+    path="umeng_cache/" />
+  <external-files-path
+    name="opensdk_external"
+    path="Images/tmp" />
+  <root-path
+    name="opensdk_root"
+    path="" />
+
+  <!-- by sina sdk -->
+  <external-files-path
+    name="share_files"
+    path="." />
+
+</paths>

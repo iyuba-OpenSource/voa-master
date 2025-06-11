@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.splash.SplashViewModel" />
+
+        <import type="com.iyuba.voa.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <ImageView
+                android:id="@+id/welcome_changepic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                binding:onClickCommand="@{viewModel.clickSubmit}"
+                binding:placeholderRes="@{R.mipmap.ic_splash_top}"
+                binding:url="@{viewModel.entity.startuppic}" />
+
+            <com.iyuba.voa.ui.widget.AroundCircleView
+                android:id="@+id/acvSkip"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/bg_jump_btn"
+                app:textBgColor="@color/white"
+                app:textColor="@color/purple_500"
+                app:textSize="3dp"
+                tools:ignore="ContentDescription"
+                tools:src="@mipmap/bg_jump_btn" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/welcome_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:src="@mipmap/ic_splash_bottom" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

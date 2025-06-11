@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_exportpdf"
+        android:orderInCategory="100"
+        android:title="导出pdf"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_collect"
+        android:orderInCategory="100"
+        android:title="收藏"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_share"
+        android:orderInCategory="100"
+        android:title="分享"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_download"
+        android:orderInCategory="100"
+        android:title="下载"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_timing"
+        android:orderInCategory="100"
+        android:title="定时设置"
+        app:showAsAction="always" />
+
+</menu>

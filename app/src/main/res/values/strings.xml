@@ -1,0 +1,52 @@
+<resources>
+    <!--    <string name="app_name">VOA</string>-->
+    <string name="protocol_content">感谢您对本公司的支持!本公司非常重视您的个人信息和隐私保护。
+                为了更好地保障您的个人权益，在您使用我们的产品前，
+                请务必审慎阅读《隐私政策》和《用户协议》内的所有条款，
+                尤其是:\n
+                 1.我们对您的个人信息的收集/保存/使用/对外提供/保护等规则条款，以及您的用户权利等条款;\n
+                 2.约定我们的限制责任、免责条款;\n
+                 3.其他以颜色或加粗进行标识的重要条款.\n您点击“同意并继续”的行为即表示您已阅读完毕并同意以上协议的全部内容。
+                如您同意以上协议内容，请点击“同意”，开始使用我们的产品和服务!</string>
+
+    <string name="person_logout">账号一旦注销，该账号下的信息将不再保留，且不能再继续使用该账号进行登录学习，确定要注销账号吗？</string>
+
+    <string name="vip_intro1">1.尊贵VIP标识\n2.去除广告，专注学习\n3.可选择自由调节语速\n4.享受高速通道，无限下载\n5.无限语音评测\n6.PDF导出\n7.本应用VIP仅限Android端当前应用使用</string>
+    <string name="vip_intro1_new">1.尊贵VIP标识\n2.可选择自由调节语速\n3.享受高速通道，无限下载\n4.PDF导出\n5.免费口语评测\n6.本应用VIP仅限Android端当前应用使用</string>
+    <string name="vip_intro1_2">1.尊贵VIP标识\n2.去除广告，专注学习\n3.无限制高速度下载,离线播放更轻松!\n4.可选择自由调节语速\n5.PDF导出\n6.免费口语评测\n7.本应用VIP仅限Android端当前应用使用</string>
+    <string name="vip_intro2">1.去除广告，专注学习\n2.显示尊贵标识\n3.开启语速调节功能\n4.享受高速通道、无限下载\n5.查看考试类所有试题答案解析\n6.智慧化语音评测\n7.支持PDF导出\n8.适用于北京爱语吧科技有限公司旗下所有应用\n9.积分商城换取话费福利</string>
+    <string name="vip_intro3">1.尊享微课模块:VOA英语Lisa博士、Rachel美语发音；Alex博士BBC英式发音；新概念英语全4册；四六级名师陈苏灵、李尚龙、石雷鹏、尹延、章敏等；托福、雅思、考研、学位英语、中职英语等名师讲解所有课程全部免费学习\n2.尊享北京爱语吧科技有限公司旗下全站会员特权。</string>
+    <string name="vip_desc1">本应用VIP</string>
+    <string name="vip_desc2">全站VIP</string>
+    <string name="vip_desc3">黄金VIP</string>
+    <string name="vip_desc_mic1">(不含微课)</string>
+    <string name="vip_desc_mic1_new"> </string>
+    <string name="vip_desc_mic2">(全部微课)</string>
+    <string name="this_vip_time1">本应用一月会员</string>
+    <string name="this_vip_time2">本应用半年会员</string>
+    <string name="this_vip_time3">本应用一年会员</string>
+    <string name="this_vip_time4">本应用三年会员</string>
+    <string name="this_vip_price1">￥25</string>
+    <string name="this_vip_price2">￥69</string>
+    <string name="this_vip_price3">￥99</string>
+    <string name="this_vip_price4">￥199</string>
+    <string name="all_vip_time1">全站会员1个月</string>
+    <string name="all_vip_time2">全站会员6个月</string>
+    <string name="all_vip_time3">全站会员12个月</string>
+    <string name="all_vip_time4">全站会员36个月</string>
+    <string name="all_vip_price1">￥50</string>
+    <string name="all_vip_price2">￥198</string>
+    <string name="all_vip_price3">￥298</string>
+    <string name="all_vip_price4">￥588</string>
+    <string name="gold_vip_time1">黄金会员1个月</string>
+    <string name="gold_vip_time2">黄金会员3个月</string>
+    <string name="gold_vip_time3">黄金会员6个月</string>
+    <string name="gold_vip_time4">黄金会员12个月</string>
+    <string name="gold_vip_price1">￥98</string>
+    <string name="gold_vip_price2">￥288</string>
+    <string name="gold_vip_price3">￥518</string>
+    <string name="gold_vip_price4">￥998</string>
+    <string name="vip_submit">立即开通</string>
+    <string name="register_account_prompt">默认密码为手机号后六位，为了您的账号安全，建议您修改用户名密码后再提交</string>
+
+</resources>

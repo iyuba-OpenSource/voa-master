@@ -1,0 +1,4 @@
+rootProject.name = "voa"
+include ':app'
+include ':mvvmhabit'
+include ':iyubalib'

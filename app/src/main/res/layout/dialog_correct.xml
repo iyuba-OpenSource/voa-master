@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!--   <variable
+               name="viewModel"
+               type="com.iyuba.voa.ui.main.home.detail.testing.CorrectDialogViewModel" />-->
+        <variable
+            name="viewModel"
+            type="com.iyuba.voa.ui.main.home.detail.testing.TestingItemViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_jx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="发音解析"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_correct_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_jx"
+            android:layout_centerInParent="true"
+            android:text="@{viewModel.wordEntity.key}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="你好" />
+
+        <ImageView
+            android:id="@+id/correct_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/tv_jx"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/ic_baseline_close_24" />
+
+        <com.iyuba.voa.ui.widget.SelectWordTextView
+            android:id="@+id/tv_correct_sen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_jx"
+            android:layout_alignStart="@id/tv_jx"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="14dp"
+            android:focusable="true"
+            android:text="@{viewModel.entity.sentence}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:selectColor="@color/highlight"
+            binding:currentView="@{viewModel.getDialogSelectWordTextView}"
+            tools:text="Excuse me!" />
+
+        <TextView
+            android:id="@+id/tv_correct_tips1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_correct_sen"
+            android:layout_alignStart="@id/tv_jx"
+            android:layout_marginTop="20dp"
+            android:text="点击每个单词可查看发音解析"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/right_pron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_correct_tips1"
+            android:layout_alignStart="@id/tv_jx"
+            android:layout_marginTop="20dp"
+            android:text='@{"正确发音:/"+viewModel.wordEntity.oriPron+"/"}'
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            binding:onClickCommand="@{viewModel.clickPron}"
+            tools:text='正确发音' />
+
+        <ImageView
+            android:id="@+id/correct_play_word"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/right_pron"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/right_pron"
+            android:src="@drawable/vector_drawable_horn"
+            binding:onClickCommand="@{viewModel.clickPron}" />
+
+        <TextView
+            android:id="@+id/user_pron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/right_pron"
+            android:layout_alignStart="@id/tv_jx"
+            android:layout_marginTop="10dp"
+            android:text='@{"你的发音:/"+viewModel.wordEntity.userPron+"/"}'
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="你的发音:" />
+
+
+        <TextView
+            android:id="@+id/correct_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_pron"
+            android:layout_alignStart="@id/tv_jx"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="14dp"
+            android:text='@{"单词释义:"+viewModel.wordEntity.def}'
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text='单词释义' />
+
+        <TextView
+            android:id="@+id/correct_tips2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/correct_explain"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/shape_corners"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="再试着跟读一遍这个单词吧"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/correct_ly2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/correct_tips2"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="14dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.clickPlay}">
+
+
+                <ImageView
+                    android:id="@+id/eval_play"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/vector_drawable_play"
+                    binding:onClickCommand="@{viewModel.clickPron}"
+                    tools:src="@drawable/vector_drawable_play" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="听原音"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/eval_rec"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/layer_record_volume"
+                    binding:currentView="@{viewModel.getRecordView}"
+                    binding:onClickCommand="@{viewModel.clickWordRecord}"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/correct_rec_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="点击开始"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/correct_score_ly"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.entity.audioWordUrl.empty ? View.INVISIBLE : View.VISIBLE}"
+                tools:visibility="visible">
+
+                <com.iyuba.voa.ui.widget.AroundCircleView
+                    android:id="@+id/eval_rec_play"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/vector_drawable_voice_play"
+                    android:src="@drawable/vector_drawable_voice_play"
+                    app:textBgColor="@color/white"
+                    app:textColor="@color/purple_500"
+                    app:textSize="2dp"
+                    binding:onClickCommand="@{viewModel.clickWordHorn}"
+                    binding:onProcess="@{viewModel.playVoicePosition}"
+                    binding:totalProcess="@{viewModel.playVoiceTotalTime}"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/correct_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text='@{viewModel.entity.wordScore}'
+                    android:textColor='@{Double.parseDouble(viewModel.entity.wordScore)*5 &lt;=50? @color/score_red :Double.parseDouble(viewModel.entity.score)&lt;80? Color.BLUE:@color/score_green}'
+                    android:textSize="12sp"
+                    tools:text="98" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/correct_ly2"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/ic_correct_5"
+            binding:onClickCommand="@{viewModel.clickBreakCourse}" />
+
+    </RelativeLayout>
+</layout>

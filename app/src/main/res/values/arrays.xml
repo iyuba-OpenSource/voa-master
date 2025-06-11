@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="home">
+        <item>全部</item>
+        <item>美国</item>
+        <item>世界</item>
+        <item>生活</item>
+        <item>娱乐</item>
+        <item>健康</item>
+        <item>教育</item>
+        <item>商业</item>
+        <item>科技</item>
+        <item>历史</item>
+        <item>单词故事</item>
+    </string-array>
+    <string-array name="home_detail">
+        <item>原文</item>
+        <item>评测</item>
+        <item>练习</item>
+        <item>单词</item>
+        <item>排行榜</item>
+    </string-array>
+    <string-array name="person_rank">
+        <item>听力</item>
+        <item>口语</item>
+        <item>学习</item>
+        <!--        <item>阅读</item>-->
+        <item>测试</item>
+    </string-array>
+
+    <string-array name="export_type">
+        <item>英文</item>
+        <item>中英双语</item>
+    </string-array>
+    <string-array name="word_sort">
+        <item>首字母</item>
+        <item>收藏时间</item>
+    </string-array>
+
+</resources>
